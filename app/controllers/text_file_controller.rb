@@ -1,0 +1,2 @@
+class TextFileController < ApplicationController
+end
