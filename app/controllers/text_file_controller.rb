@@ -1,6 +1,6 @@
 class TextFileController < ApplicationController
   def index
-    @text_file = TextFile.first
+    @text_file = TextFile.new
   end
 
   def create
