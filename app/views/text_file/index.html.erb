@@ -1,0 +1,16 @@
+<h1> <%= @text_file.target %> </h1>
+
+
+
+<h1>File Upload</h1>
+<%= form_tag({action: :upload}, multipart: true) do %>
+  <%= file_field_tag 'text_file' %>
+     <%= submit_tag %>
+
+<% end %>
+
+<%= form_for @text_file do |f| %>
+  <%= f.file_field :text_file %>
+     <%= submit_tag %>
+
+<% end %>

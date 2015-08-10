@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'text_file#index'
   resources :text_files
+
+  post 'text_file/upload' => 'text_file#upload'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
