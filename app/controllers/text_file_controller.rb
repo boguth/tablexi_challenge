@@ -9,7 +9,8 @@ class TextFileController < ApplicationController
   end
 
   def upload
-    puts params
-    puts "HERE WE ARE"
+    uploaded_file = params[:text_file]
+    file_content = uploaded_file.read
+    puts file_content
   end
 end
