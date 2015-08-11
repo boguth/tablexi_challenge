@@ -3,14 +3,10 @@ class TextFileController < ApplicationController
     @text_file = TextFile.new
   end
 
-  def create
-    # post = DataFile.save(params[:upload])
-    # render :text => "File has been uploaded successfully"
-  end
 
   def upload
     uploaded_file = params[:text_file]
-    file_content = uploaded_file.read
-    puts file_content
+    @text_file = TextFile.new(uploaded_file)
+    @text_file.solve
   end
 end
