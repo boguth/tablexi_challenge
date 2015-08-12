@@ -11,6 +11,12 @@ This challenge was fun for me. It was my first experience with an [NP-Complete](
 - https://www.youtube.com/watch?v=NdF1QDTRkck
 - http://stackoverflow.com/questions/4632322/finding-all-possible-combinations-of-numbers-to-reach-a-given-sum
 
-I would like to work on the efficiency of the program. I know that right now there are a couple of algorithms in my application that are (O(n^2)). Being only recently exposed to Big O notation, I am still in the process of learning how to make my algorithms more lean, and I felt that the time it would take me to figure out how to get things down from quadratic time would surpass what was a reasonable amount of time to get you a working solution.
+In the interest of giving you a working solution in a reasonable timespan, I chose not to address a couple of things that would improve the functionality of the program. I wanted to list them below so that you know that I am aware of them.
+
+1. As I started playing around with validating files and making sure that my solution works for only the formats that resemble the initial example, I stumbled on an edge case. If two different items cost the same the program adds both of them to a solution. I have a pretty good idea about how to solve this. It would involve checking to see if two different items of the same price are on the list. If they are, the program would deliver two versions of the list. One list has one item, the other list has the other. Again, with more time I think I could easily solve this.
+
+2. I know that right now there are a couple of algorithms in my application that are (O(n^2)). Being only recently exposed to Big O notation, I am still in the process of learning how to make my algorithms more lean, and I felt that the time it would take me to figure out how to get things down from quadratic time would surpass what was a reasonable amount of time to get you a working solution.
+
 
 Things to know for folks looking through the code:
+The code has a number of comments throughout. They should help guide anyone reading it through the control flow and logic. Please don't hesitate to get in touch with me for any questions.

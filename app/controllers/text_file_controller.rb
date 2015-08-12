@@ -4,11 +4,19 @@ class TextFileController < ApplicationController
   end
 
   def upload
-    uploaded_file = params[:text_file].read
-    @text_file = TextFile.new
-    if uploaded_file != nil && @text_file.correct_formatting?(uploaded_file)
-      @text_file.menu_items_array = uploaded_file
-      @text_file.solve
+  uploaded_file = params[:text_file]
+    if uploaded_file != nil # If it's empty, we're just going to re render the index page with an error message. If it's not then we continue on.
+      uploaded_file = uploaded_file.read
+      @text_file = TextFile.new
+      if @text_file.correct_formatting?(uploaded_file) #This checks to make sure that whatever is being passed in is formatted like the initial example.
+        @text_file.menu_items_array = uploaded_file # This populates a variable that stores each of the lines in the txt file. Right now it's storing
+                                                    # a String, but we're going to change that to an array on the very next step.
+                                                    # Hence the variable name "menu_items_array"
+        @text_file.solve # This is essentially the runner. It kicks off a series of steps that determines possible solutions and formats them.
+      else # If the file wasn't formatted correctly, we re-render the page with an error message.
+        @error = "Something went wrong. Either the file you uploaded wasn't formatted properly or you failed to upload a file at all."
+        render :index
+      end
     else
       @error = "Something went wrong. Either the file you uploaded wasn't formatted properly or you failed to upload a file at all."
       render :index

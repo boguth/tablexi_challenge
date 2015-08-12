@@ -2,10 +2,10 @@
   <% if @text_file.answer.length < 1 %>
     <p class="flow-text"> One of two things happened. Either you supplied me with a file that has no possible solutions, or my program does not work nearly as well as I thought it did. </p>
   <% else %>
-    <p class="flow-text"> You wanted to see how many possible ways you could match $<%= @text_file.target_price %>. For the file you uploaded, there <% if @text_file.answer.length > 1 %> are <% else %> is <% end %> <%= @text_file.answer.length %> possible solution<% if @text_file.answer.length > 1 %>s<% end %>. </p>
+    <p class="flow-text"> You wanted to see how many possible ways you could match $<%= @text_file.target_price %>. For the file you uploaded, there <% if @text_file.answer.length > 1 %> are <% else %> is <% end %> <%= @text_file.answer.length %> possible way<% if @text_file.answer.length > 1 %>s<% end %> you can hit that price point. You can get: </p>
       <% @text_file.answer.length.times do |count| %>
       <% if count > 0 %>
-        <p class="flow-text"> or </p>
+        <p class="flow-text"> or you can get </p>
       <% end %>
         <% @text_file.answer[count].each_with_index do |possibilities, index| %>
           <% if index == 0 %>
@@ -26,5 +26,5 @@
 </div>
 
 
- <div class="divider"></div>
+<div class="divider"></div>
 <p class="flow-text">Want to go <%= link_to "back", root_path %>?</p>
