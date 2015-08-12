@@ -12,10 +12,6 @@ class TextFile < ActiveRecord::Base
     @combos_holder = []
   end
 
-  # after_initialize do |user|
-  #   puts "You have initialized an object!"
-  # end
-
   def solve
     @menu_items_array = @menu_items_array.split("\n")
     @menu_items_array.each do |line|
