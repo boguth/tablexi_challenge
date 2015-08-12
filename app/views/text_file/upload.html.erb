@@ -1,1 +1,25 @@
 <h1> SUCCESS!</h1>
+<h1> Target Price: <%= @text_file.target %> <h1>
+<h1> Possible Solutions: <h1>
+<% @text_file.answer.length.times do |count| %>
+  <% if count > 0 %>
+    <p> or </p>
+  <% end %>
+  <% @text_file.answer[count].each_with_index do |possibilities, index| %>
+
+      <% if index == 0 %>
+        <p> <%= possibilities %> order<% if possibilities.to_i > 1 %>s<% end %> of the
+      <% end %>
+      <% if index == 1 %>
+        <%= possibilities %> </p>
+      <% end %>
+      <% if index % 2 == 0  && index > 1 %>
+        <p> and <%= possibilities %> order<% if possibilities.to_i > 1 %>s<% end %> of the
+      <% end %>
+      <% if index % 2 != 0  && index > 1 %>
+        <%= possibilities %> </p>
+      <% end %>
+
+  <% end %>
+<% end %>
+

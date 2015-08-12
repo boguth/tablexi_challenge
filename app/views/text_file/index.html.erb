@@ -1,6 +1,10 @@
-<h1>File Upload</h1>
+<div class="section">
+   <div class="row">
+  <div class="col s12"><p>Hi. My name is Bo, and this is my TableXI coding challenge.</p></div>
   <%= form_tag({action: :upload}, multipart: true) do %>
-  <%= file_field_tag 'text_file' %>
-  <%= submit_tag %>
-<% end %>
+    <%= file_field_tag 'text_file' %>
+    <%= submit_tag %>
+  <% end %>
+</div>
+
 

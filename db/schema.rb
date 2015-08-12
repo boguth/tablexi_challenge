@@ -17,11 +17,10 @@ ActiveRecord::Schema.define(version: 20150810161832) do
   enable_extension "plpgsql"
 
   create_table "text_files", force: :cascade do |t|
-    t.float    "target"
-    t.string   "answer",     default: [],              array: true
-    t.string   "lines"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.float    "target_price"
+    t.string   "answer",       default: [],              array: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
 end

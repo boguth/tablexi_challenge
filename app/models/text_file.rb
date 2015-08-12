@@ -1,30 +1,31 @@
 class TextFile < ActiveRecord::Base
+  attr_accessor :menu_items_array, :target
 
-  def initialize(file)
-    @menu_items_array = file.read
+
+  after_initialize do
+    @menu_items_array =[]
     @target = 0
     @price_array = []
     @matched_prices = []
     @call_count = 0
-    @price_count = Hash.new 0
     @price_count_holder = []
-    @combos = []
+    @combos_holder = []
   end
+
+  # after_initialize do |user|
+  #   puts "You have initialized an object!"
+  # end
 
   def solve
     @menu_items_array = @menu_items_array.split("\n")
-    @target = @menu_items_array.delete_at(0)
     @menu_items_array.each do |line|
       @price_array << line.scan(/\d.+/)[0].to_f
     end
+    @menu_items_array = @menu_items_array.drop(1)
+    @target = @price_array.delete_at(0)
     subset_prices(@price_array, @target.to_f)
-    sort_dinner_combos(@matched_prices, @menu_items_array)
+    sort_dinner_combos
   end
-
-
-  #   menu_items_array = menu_items_array.drop(1)
-
-
 
   private
 
@@ -46,64 +47,51 @@ class TextFile < ActiveRecord::Base
   end
 
   def count_prices(prices)
+    price_count = Hash.new 0
     prices.each do | price |
-      if @price_count[price.to_s]
-        @price_count[price.to_s] += 1
+      if price_count[price.to_s]
+        price_count[price.to_s] += 1
       else
-        @price_count[price.to_s] = 1
+        price_count[price.to_s] = 1
       end
     end
-    @price_count
+    price_count
   end
 
-  def sort_dinner_combos(prices, menu)
-    prices.each do |sub_price|
+  def sort_dinner_combos
+    @matched_prices.each do |sub_price|
       @price_count_holder << count_prices(sub_price)
     end
 
-    price_count_holder.each do |price_counts|
-      @combos << count_items(menu, price_counts)
+    @price_count_holder.each do |price_counts|
+      @combos_holder << count_items(@menu_items_array, price_counts)
     end
-    format_results(@combos)
+    format_results
   end
 
   def count_items(menu, price_counts)
+    current_combo = []
     price_counts.each do |price, count|
       menu.each do |menu_item|
         if menu_item.include?(price)
-          @combos << count.to_s
-          @combos << menu_item
+          current_combo << count.to_s
+          current_combo << menu_item
         end
       end
     end
-    @combos
+    current_combo
   end
 
-  def format_results(combos)
-    @combos.each do |combo|
-      the_answer = ""
-      combo.each_with_index do |amount_and_items, index|
-        if index == 0
-          the_answer = the_answer + "#{amount_and_items} x "
+  def format_results
+    @combos_holder.each do |combo|
+      combo.map! do |item|
+        if item.include?(",")
+          item.gsub!(/\,.*/, "")
+        else
+          item
         end
-        if index == 1
-          the_answer = the_answer + "#{amount_and_items.gsub(/,.*/, '')}"
-        end
-        if index % 2 == 0  && index > 1
-          the_answer = the_answer + "#{amount_and_items} x "
-        end
-        if index % 2 != 0  && index > 1
-          the_answer = the_answer + "#{amount_and_items.gsub(/,.*/, '')}"
-        end
-      end
-      if @call_count == 0
-        puts the_answer
-        @call_count += 1
-      else
-        puts "or \n"
-        puts the_answer
-        @call_count += 1
       end
     end
+    @combos_holder
   end
 end
