@@ -1,25 +1,30 @@
-<h1> SUCCESS!</h1>
-<h1> Target Price: <%= @text_file.target %> <h1>
-<h1> Possible Solutions: <h1>
-<% @text_file.answer.length.times do |count| %>
-  <% if count > 0 %>
-    <p> or </p>
-  <% end %>
-  <% @text_file.answer[count].each_with_index do |possibilities, index| %>
+<div class="section">
+  <% if @text_file.answer.length < 1 %>
+    <p class="flow-text"> One of two things happened. Either you supplied me with a file that has no possible solutions, or my program does not work nearly as well as I thought it did. </p>
+  <% else %>
+    <p class="flow-text"> Alright. You wanted to see how many possible ways you could match $<%= @text_file.target %>. For the file you uploaded, there <% if @text_file.answer.length > 1 %> are <% else %> is <% end %> <%= @text_file.answer.length %> possible solution<% if @text_file.answer.length > 1 %>s<% end %>. </p>
+      <% @text_file.answer.length.times do |count| %>
+      <% if count > 0 %>
+        <p class="flow-text"> or </p>
+      <% end %>
+        <% @text_file.answer[count].each_with_index do |possibilities, index| %>
+          <% if index == 0 %>
+            <p class="flow-text"> <%= possibilities %> order<% if possibilities.to_i > 1 %>s<% end %> of the
+          <% end %>
+          <% if index == 1 %>
+            <%= possibilities %> </p>
+          <% end %>
+          <% if index % 2 == 0  && index > 1 %>
+            <p class="flow-text"> plus <%= possibilities %> order<% if possibilities.to_i > 1 %>s<% end %> of the
+          <% end %>
+          <% if index % 2 != 0  && index > 1 %>
+            <%= possibilities %> </p>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+</div>
 
-      <% if index == 0 %>
-        <p> <%= possibilities %> order<% if possibilities.to_i > 1 %>s<% end %> of the
-      <% end %>
-      <% if index == 1 %>
-        <%= possibilities %> </p>
-      <% end %>
-      <% if index % 2 == 0  && index > 1 %>
-        <p> and <%= possibilities %> order<% if possibilities.to_i > 1 %>s<% end %> of the
-      <% end %>
-      <% if index % 2 != 0  && index > 1 %>
-        <%= possibilities %> </p>
-      <% end %>
 
-  <% end %>
-<% end %>
-
+ <div class="divider"></div>
+<p class="flow-text">Want to go <%= link_to "back", root_path %>?</p>
