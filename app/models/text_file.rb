@@ -1,10 +1,7 @@
 class TextFile < ActiveRecord::Base
-  attr_accessor :menu_items_array, :target
-
-
+  attr_accessor :menu_items_array
   after_initialize do
     @menu_items_array =[]
-    @target = 0
     @price_array = []
     @matched_prices = []
     @call_count = 0
@@ -18,8 +15,8 @@ class TextFile < ActiveRecord::Base
       @price_array << line.scan(/\d.+/)[0].to_f
     end
     @menu_items_array = @menu_items_array.drop(1)
-    @target = @price_array.delete_at(0)
-    subset_prices(@price_array, @target.to_f)
+    self.target_price = @price_array.delete_at(0).to_f
+    subset_prices(@price_array, self.target_price)
     sort_dinner_combos
   end
 
@@ -88,6 +85,6 @@ class TextFile < ActiveRecord::Base
         end
       end
     end
-    @combos_holder
+    self.answer = @combos_holder
   end
 end
