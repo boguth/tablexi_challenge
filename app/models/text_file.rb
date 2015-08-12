@@ -9,6 +9,22 @@ class TextFile < ActiveRecord::Base
     @combos_holder = []
   end
 
+
+  def correct_formatting?(file)
+    lines = []
+    lines = file.split("\n")
+    if lines[0] !~ /\$\d+.\d+/
+      false
+    end
+    lines.delete_at(0)
+    lines.each do |line|
+      if line.strip !~ /\w+\s\w+,\$\d.\d+/ || line.strip !~ /\w+,\$\d.\d+/ || line.strip !~ /\w+.\w+,\$\d+.\d+/
+        return false
+      end
+    end
+    return true
+  end
+
   def solve
     @menu_items_array = @menu_items_array.split("\n")
     @menu_items_array.each do |line|

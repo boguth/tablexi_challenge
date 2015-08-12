@@ -2,7 +2,7 @@
 <div class="section">
   <p class="flow-text">Hi. My name is Bo, and this is my TableXI coding challenge solution. Thanks for taking the time to check it out.</p>
   <p class="flow-text">If you would prefer a simpler solution, click <a href="https://github.com/boguth/table_xi_tech_spike">here</a> and follow the instructions. If you would like to see the source code for this solution, click <a href="https://github.com/boguth/tablexi_challenge">here</a>.</p>
-  <p class="flow-text">To continue, upload the mune file you would like to test and click the submit button.</p>
+  <p class="flow-text">To continue, upload the menu file you would like to test and click the submit button. Make sure it's formatted with your target price at the top, and your menu items on subsequent lines. Like <a href="./correct-format.png">this</a>.</p>
 </div>
 <div class="file-field input-field">
   <input class="file-path validate" type="text" name="text_file"/>
@@ -11,7 +11,13 @@
     <%= submit_tag "Submit", class: "btn" %>
   <% end %>
 </div>
-
+<div class="section">
+  <div class = "error-message">
+  <% if @error %>
+   <p class="flow-text"> <%= @error %> </p>
+  <% end %>
+  </div>
+</div>
 
 
 
