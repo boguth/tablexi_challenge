@@ -14,11 +14,11 @@ class TextFileController < ApplicationController
                                                     # Hence the variable name "menu_items_array"
         @text_file.solve # This is essentially the runner. It kicks off a series of steps that determines possible solutions and formats them.
       else # If the file wasn't formatted correctly, we re-render the page with an error message.
-        @error = "Something went wrong. Either the file you uploaded wasn't formatted properly or you failed to upload a file at all."
+        @error = "Something went wrong, which means either I messed up or you did. But that's okay! We can try again! Make sure that the file you're trying to upload is in the right format."
         render :index
       end
     else
-      @error = "Something went wrong. Either the file you uploaded wasn't formatted properly or you failed to upload a file at all."
+      @error = "Something went wrong, which means either I messed up or you did. But that's okay! We can try again! Make sure that the file you're trying to upload is in the right format."
       render :index
     end
   end
